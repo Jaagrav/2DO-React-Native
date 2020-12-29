@@ -1,0 +1,12 @@
+{
+  "name": "2DO",
+  "displayName": "2DO",
+  "expo": {
+    "name": "2DO",
+    "slug": "2DO",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
