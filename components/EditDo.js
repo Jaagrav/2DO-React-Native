@@ -2,17 +2,17 @@ import React from 'react';
 import { StyleSheet, View, TextInput, TouchableOpacity, Alert } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-const InputDo = ({data, setData}) => {
-    const [text,setText] = React.useState("");
+const EditDo = ({data, setData, value, index, navigation}) => {
+    const [text,setText] = React.useState(value);
     const inputRef = React.useRef();
 
-    const addData = () => {
+    const editData = () => {
         if(text.trim()) {
-            setData([{text: text, done: false},...data]);
-            setText("");
-            inputRef.current.blur();
+            data[index].text = text;
+            setData([...data]);
+            navigation.goBack();
         }
-        else
+        else{
             Alert.alert(
                 'No item entered',
                 'Please enter a valid item. Make sure it is not null or empty.',
@@ -24,9 +24,15 @@ const InputDo = ({data, setData}) => {
                 ],
                 {cancelable: true},
             );
+            setText(data[index].text);
+        }
     }
+
+    React.useEffect(()=>{
+        inputRef.current.focus();
+    }, []);
     return (
-        <View style={styles.inputDo}>
+        <View style={styles.editDo}>
             <TextInput 
                 ref={inputRef}
                 placeholder="Type Something..."
@@ -36,10 +42,10 @@ const InputDo = ({data, setData}) => {
             />
             <TouchableOpacity
                 style={styles.textIcon}
-                onPress={addData}
+                onPress={editData}
             >
                 <Icon
-                    name='add'
+                    name='edit'
                     type='material'
                     color='#16202A'
                     size={30}
@@ -49,10 +55,10 @@ const InputDo = ({data, setData}) => {
     )
 }
 
-export default InputDo;
+export default EditDo;
 
 const styles = StyleSheet.create({
-    inputDo: {
+    editDo: {
         backgroundColor: "#90FF8D",
         paddingLeft: 10,
         paddingRight: 10,

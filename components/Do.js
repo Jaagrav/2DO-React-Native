@@ -2,13 +2,19 @@ import React from 'react';
 import { StyleSheet, Text, TouchableOpacity } from 'react-native';
 import { Icon } from 'react-native-elements';
 
-export default function Do({dragData, deleteItem, strikeItem}) {
+export default function Do({dragData, deleteItem, strikeItem, navigation, data, setData}) {
     const {item, index, drag, isActive} = dragData;
+
+    const openEditActivity = () => {
+        navigation.navigate('EditTask', {data, setData, item, index});
+    }
+
     return (
         <TouchableOpacity 
             style={styles.touchableOpacity}
             onPressIn={drag}
             onPress={() => {strikeItem(index)}}
+            onLongPress={openEditActivity}
         >
             <Icon
                 name='check-circle-outline'

@@ -1,8 +1,8 @@
 
 # Apps
-/ios
-/android
-/__tests__
+ios
+android
+__tests__/
 
 # OSX
 #
